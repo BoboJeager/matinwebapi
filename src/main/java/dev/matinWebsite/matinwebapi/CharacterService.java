@@ -17,4 +17,7 @@ public class CharacterService {
         ObjectId mongoId = new ObjectId(id);
         return  characterRepository.findById(mongoId).orElse(null);
     }
+
+    Characters CreateCharacter(Characters character){return  characterRepository.save(character);}
+
 }

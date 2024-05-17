@@ -8,6 +8,8 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document(collection = "characters")
 
 @Data
@@ -24,8 +26,8 @@ public class Characters {
     private String alignment;
     private String charClass;
     private int level;
-    private String[] colors;
-    private Stat[] stats;
+    private List<String> colors;
+    private List<Stat> stats;
 
     private String ideals;
     private String bonds;
