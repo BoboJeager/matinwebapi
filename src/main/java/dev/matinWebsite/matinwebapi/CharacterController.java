@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import static org.springframework.http.HttpStatus.*;
+
 @RestController
 @RequestMapping("/api/v1/characters")
 public class CharacterController {
@@ -70,6 +72,20 @@ public class CharacterController {
             return new ResponseEntity<>(createdChar, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PatchMapping(value = "/{id}")
+    public ResponseEntity<Object> PatchCharacter(@PathVariable("id") String id, @RequestBody Map<String,Object> patchBody)
+    {
+        try{
+            Characters patchedCharacter = characterService.PatchCharacter(id, patchBody);
+            if(patchedCharacter == null){
+                return new ResponseEntity<>(NOT_FOUND);
+            }
+            return new ResponseEntity<>(patchedCharacter, OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(INTERNAL_SERVER_ERROR);
         }
     }
 
